@@ -4,7 +4,8 @@ import { useRoute } from 'vue-router'
 
 const active = ref(0)
 const route = useRoute()
-// 仅 /chat 对话为全屏页隐藏 tabbar；行程等 tab 保留底部导航
+// 只有三个 Tab 落地页显示 tabbar：/（首页）、/trip（行程列表）、/profile（我的）
+// /trip/:id（行程详情）、/chat（对话）、/message（消息）为全屏页，刻意隐藏
 const showTabbar = computed(() =>
   ['/', '/trip', '/profile'].includes(route.path),
 )

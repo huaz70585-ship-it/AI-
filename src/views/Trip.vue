@@ -4,13 +4,13 @@
     <van-nav-bar left-arrow fixed placeholder @click-left="onBack">
       <template #title>
         <div class="nav-title">
-          <span class="nav-title__main">上海 · 4日</span>
+          <span class="nav-title__main">{{ meta.title }}</span>
           <span class="nav-title__sub">
-            <span>10.12 - 10.15</span>
+            <span>{{ meta.dateRange }}</span>
             <span class="dot">·</span>
-            <span>2人</span>
+            <span>{{ meta.people }}人</span>
             <span class="dot">·</span>
-            <span class="nav-title__budget">¥3,860</span>
+            <span class="nav-title__budget">¥{{ meta.budget }}</span>
           </span>
         </div>
       </template>
@@ -109,7 +109,7 @@
     <footer class="actionbar">
       <div class="actionbar__left">
         <span class="actionbar__label">总预算</span>
-        <span class="actionbar__amount">¥3,860</span>
+        <span class="actionbar__amount">¥{{ meta.budget }}</span>
         <span class="actionbar__sub">6 项可预订</span>
       </div>
       <button class="actionbar__btn">一键预订全部</button>
@@ -118,11 +118,29 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
+/* 行程头部元信息：占位数据，等 GET /v1/trips/:id 落地后替换 */
+interface TripMeta {
+  title: string
+  dateRange: string
+  people: number
+  budget: string
+}
+const TRIP_META: Record<string, TripMeta> = {
+  t1: { title: '上海 · 4日', dateRange: '10.12 - 10.15', people: 2, budget: '3,860' },
+  t2: { title: '杭州 · 2日', dateRange: '11.02 - 11.03', people: 1, budget: '1,280' },
+  t3: { title: '京都 · 5日', dateRange: '08.15 - 08.19', people: 2, budget: '12,600' },
+  t4: { title: '大理 · 3日', dateRange: '09.28 - 09.30', people: 2, budget: '2,400' },
+}
+
+const route = useRoute()
 const router = useRouter()
 const activeDay = ref(1)
+
+const tripId = computed(() => String(route.params.id ?? 't1'))
+const meta = computed(() => TRIP_META[tripId.value] ?? TRIP_META.t1)
 
 interface TlItem {
   time: string
@@ -159,7 +177,7 @@ const items = ref<TlItem[]>([
 ])
 
 function onBack() {
-  router.push('/')
+  router.push('/trip')
 }
 </script>
 
@@ -176,7 +194,9 @@ function onBack() {
   --c-money: #0e7c6b;       /* 线框 teal：预算/金额 */
   --c-warn: #ff6a2b;        /* 暖橙：待确认动作 */
   --c-warn-soft: #fff3e6;
-  --tabbar-h: calc(var(--van-tabbar-height, 50px) + env(safe-area-inset-bottom));
+  /* 详情页不再有底部 tabbar（App.vue 只对 /trip 列表页显示 tabbar），
+     这里只留安全区，供吸底操作栏与 FAB 定位 */
+  --tabbar-h: env(safe-area-inset-bottom, 0px);
 
   min-height: 100vh;
   min-height: 100dvh;
@@ -379,7 +399,8 @@ function onBack() {
 .fab {
   position: fixed;
   right: 16px;
-  bottom: calc(var(--tabbar-h) + 64px);
+  /* 原 64px 会让 FAB 底边压进吸底操作栏（栏高约 73px），改 88px 留出间隙 */
+  bottom: calc(var(--tabbar-h) + 88px);
   width: 52px; height: 52px;
   border-radius: 50%;
   background: var(--c-brand);

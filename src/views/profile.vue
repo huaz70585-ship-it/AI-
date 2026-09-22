@@ -59,10 +59,12 @@
     <section class="block">
       <div class="block__head">
         <h3 class="block__title">我的行程</h3>
-        <button class="block__more">全部 5 个 <van-icon name="arrow" /></button>
+        <button class="block__more" @click="router.push('/trip')">
+          全部 5 个 <van-icon name="arrow" />
+        </button>
       </div>
 
-      <article class="trip">
+      <article class="trip" @click="router.push('/trip/t1')">
         <div class="trip__body">
           <p class="trip__route">上海 · 4日</p>
           <p class="trip__meta">10.12 - 10.15 · 2人</p>
@@ -114,6 +116,10 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 // 行程封面图（本页唯一照片 · 压字加渐变遮罩）
 const tripImage =
   'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=' +

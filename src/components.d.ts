@@ -11,25 +11,14 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    VanButton: typeof import('vant/es')['Button']
     VanCell: typeof import('vant/es')['Cell']
     VanCellGroup: typeof import('vant/es')['CellGroup']
     VanConfigProvider: typeof import('vant/es')['ConfigProvider']
-    VanField: typeof import('vant/es')['Field']
-    VanGrid: typeof import('vant/es')['Grid']
-    VanGridItem: typeof import('vant/es')['GridItem']
     VanIcon: typeof import('vant/es')['Icon']
-    VanImage: typeof import('vant/es')['Image']
     VanNavBar: typeof import('vant/es')['NavBar']
-    VanProgress: typeof import('vant/es')['Progress']
-    VanRadio: typeof import('vant/es')['Radio']
-    VanRadioGroup: typeof import('vant/es')['RadioGroup']
-    VanStepper: typeof import('vant/es')['Stepper']
     VanTabbar: typeof import('vant/es')['Tabbar']
     VanTabbarItem: typeof import('vant/es')['TabbarItem']
-    VanTag: typeof import('vant/es')['Tag']
   }
 }
