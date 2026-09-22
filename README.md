@@ -1,5 +1,91 @@
-# Vue 3 + TypeScript + Vite
+# 智能旅游助手 · AI Travel Companion
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+H5 端 AI 智能旅游平台 —— 工具效率型打底，叠加轻 AI 规划。主打「效率、简洁、AI」三件事：首页让用户先随便看看，AI 只做轻介入；对话页给出可编辑的结构化行程，而不是一段文字。
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## 技术栈
+
+Vue 3 + Vant 4 + Vue Router + Pinia + Axios + Vite + SSE
+
+- **Pinia** 管理用户态（token / 登录态，localStorage 持久化）
+- **Axios** 统一实例：请求拦截带 Bearer、响应拦截解包 `{code,data,message}`、401 自动登出
+- **SSE** 走 `fetch` POST + ReadableStream（原生 EventSource 不支持 POST+Header），OpenAI delta 自动解析，支持 AbortController 中断
+
+## 五大页面
+
+### 1. 首页（[Home.vue](src/views/Home.vue)）
+工具效率型骨架 + 一层 AI：
+- 城市定位 + 消息铃铛入口
+- 需求式搜索框（「说出你想去哪儿」）+ 3 个快捷需求芯片
+- 金刚区一行 5 入口（白底线性图标，无彩色块）
+- AI 行程规划入口卡（全页唯一视觉重心）
+- 双列内容流（16:9 主视觉 + 4:3 卡片）
+
+### 2. 对话（[Chat.vue](src/views/Chat.vue)）
+对话六件套：
+- ① 消息区：AI 左 / 用户右，单条最长 85%
+- ② 引用与来源：可展开角标，建立信任
+- ③ 结构化产物：卡片 + 绿色时间轴，非纯文字
+- ④ 消息操作条：复制 / 重试 / 编辑 / 反馈
+- ⑤ 建议芯片：空状态 3-4 个，每轮回答后 2-3 个追问
+- ⑥ 输入条：语音 / 图片 / 联网 / 深度思考开关
+
+### 3. 行程（[Trip.vue](src/views/Trip.vue)）
+- 行程 / 地图 Tab 切换
+- 日期芯片 D1-D4 + 当日天气预算
+- 时间轴：点+虚线轨道，三态点（当前蓝实 / 已过灰实 / 未到灰空心）
+- AI 总结条（浅蓝）+ AI 待确认卡（浅橙，唯一暖橙落点）
+- FAB 新增 + 底部操作栏（总预算 + 一键预订，贴 tabbar 上方）
+
+### 4. 消息（[Message.vue](src/views/Message.vue)）
+消息中心，不占底部 Tab（从主页铃铛进入）：
+- 分类筛选：全部 / 交易 / 行程 / 互动 / 系统，未读红徽章
+- 时间分组：今天 / 本周 / 更早
+- 事务型 vs 营销型视觉分离：交易/行程有彩色头像+落点按钮，系统/互动灰头像无按钮
+- 未读 = 红点 + 粗体，不用整行变色
+- 每条带落点：去支付（暖橙）/ 查看行程（蓝）
+
+### 5. 我的（[profile.vue](src/views/profile.vue)）
+主角是足迹卡：
+- 蓝色渐变 Hero（全页唯一大色块）+ 足迹卡压叠（12 城 / 46 天 / 8,240 km）
+- 行程 ≠ 订单：分开入口，AI 作状态展示（不加新入口）
+- 4 个高频入口不折叠：订单（暖橙红点）/ 收藏 / 优惠券 / 相册
+- 设置列表：帮助 / 反馈 / 通用 / 关于
+
+## 设计系统
+
+严格三层配色，面积比约 80 / 15 / 5：
+
+| 层 | 用途 | 色值 |
+|----|------|------|
+| 基础层 80% | 页面底 / 卡片 / 分割线 / 文字 | `#F6F7F9` / `#FFFFFF` / `#EDEFF2` / `#1A1D21`·`#6B7280` |
+| 品牌层 15% | 主色三档（亮/中/深） | `#4DA3F5` / `#0F7BE0` / `#0A4A8A` |
+| 强调层 5% | 暖橙（价格/动作）/ teal（预算金额）/ 红（未读点） | `#FF6A2B` / `#0E7C6B` / `#FF4D4F` |
+
+铁律：冷色管信任，暖色管动作，两者不平分面积。页面底用 `#F6F7F9` 而非纯白，避免白卡片浮起显脏。
+
+## 图片规则
+
+- 同屏图片比例不超过 2 种（16:9 + 4:3）
+- 所有图片叠 5% 品牌色统一色温
+- 图片与彩色块间保留 ≥8px 缓冲
+- 压字必加底部渐变遮罩（透明 → 黑 60%）
+- 图片圆角 = 容器圆角 − 内边距
+
+## 目录结构
+
+```
+src/
+├── api/            travel.ts(REST) · chat.ts(SSE)
+├── router/         路由表
+├── stores/         user.ts(Pinia)
+├── utils/          request.ts(Axios) · sse.ts(SSE)
+└── views/          Home · Chat · Trip · TripList · Message · profile
+```
+
+## 开发
+
+```bash
+npm install
+npm run dev      # http://localhost:5175
+npm run build
+```
