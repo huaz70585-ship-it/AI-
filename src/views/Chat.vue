@@ -258,19 +258,11 @@ onMounted(() => {
 <style scoped>
 /* 沿用首页三层体系 + 线框专用色 */
 .chat {
-  --c-bg: #f6f7f9;
-  --c-card: #ffffff;
-  --c-divider: #edeff2;
-  --c-text: #1a1d21;
-  --c-sub: #6b7280;
-  --c-brand: #0f7be0;
-  --c-brand-deep: #0a4a8a;
-  --c-chip-bg: #e6f1fb;
-  --c-chip-border: #85b7eb;
+  /* 通用颜色 token 见 src/styles/tokens.css，下面只留对话页专用色 */
   --c-ai-bubble: #f1efe8;       /* AI 灰气泡（线框 #F1EFE8） */
   --c-user-bubble: #b5d4f4;     /* 用户蓝气泡（线框 #B5D4F4） */
-  --c-product-bg: #e6f1fb;
-  --c-product-border: #85b7eb;
+  --c-product-bg: var(--c-brand-soft);
+  --c-product-border: var(--c-brand-line);
   --c-timeline-bg: #e1f5ee;     /* 绿色时间轴子块 */
   --c-timeline-border: #5dcaa5;
   --c-timeline-dot: #1d9e75;
@@ -350,8 +342,8 @@ onMounted(() => {
   padding: 4px 8px;
   font-size: 11px; font-weight: 600;
   color: var(--c-brand-deep);
-  background: var(--c-chip-bg);
-  border: 1px solid var(--c-chip-border);
+  background: var(--c-brand-soft);
+  border: 1px solid var(--c-brand-line);
   border-radius: 6px;
 }
 .cite :deep(.van-icon) { font-size: 13px; }
@@ -384,7 +376,7 @@ onMounted(() => {
 .product__head {
   display: flex; align-items: center; justify-content: space-between;
   padding: 8px 10px;
-  border-bottom: 1px solid var(--c-chip-border);
+  border-bottom: 1px solid var(--c-brand-line);
 }
 .product__title { font-size: 13px; font-weight: 700; color: var(--c-brand-deep); }
 .product__edit {
@@ -455,7 +447,7 @@ onMounted(() => {
   border-radius: 4px;
 }
 .actions__btn :deep(.van-icon) { font-size: 12px; }
-.actions__btn:active { color: var(--c-brand); border-color: var(--c-chip-border); }
+.actions__btn:active { color: var(--c-brand); border-color: var(--c-brand-line); }
 
 /* ---------- ⑤ 建议芯片 ---------- */
 .suggest {
@@ -472,12 +464,12 @@ onMounted(() => {
   font-size: 12.5px; font-weight: 500;
   color: var(--c-brand-deep);
   background: transparent;
-  border: 1px solid var(--c-chip-border);
+  border: 1px solid var(--c-brand-line);
   border-radius: 16px;
   white-space: nowrap;
   transition: all 0.15s;
 }
-.suggest__chip:active { background: var(--c-chip-bg); }
+.suggest__chip:active { background: var(--c-brand-soft); }
 
 /* ---------- ⑥ 输入条 ---------- */
 .input {
@@ -506,8 +498,8 @@ onMounted(() => {
 .toggle :deep(.van-icon) { font-size: 13px; }
 .toggle.is-on {
   color: var(--c-brand-deep);
-  background: var(--c-chip-bg);
-  border-color: var(--c-chip-border);
+  background: var(--c-brand-soft);
+  border-color: var(--c-brand-line);
 }
 .input__row {
   display: flex;

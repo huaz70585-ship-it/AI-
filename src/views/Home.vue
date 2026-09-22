@@ -200,26 +200,14 @@ function onCard(c: { name: string }) {
    基础层 80% · 品牌层 15% · 强调层 5%
    ============================================================ */
 .home {
-  /* 基础层 */
-  --c-bg: #f6f7f9;          /* 页面底（非纯白，避免白卡浮脏） */
-  --c-card: #ffffff;         /* 卡片 */
-  --c-divider: #edeff2;      /* 分割线 */
-  --c-text: #1a1d21;         /* 主文字 */
-  --c-sub: #6b7280;          /* 次文字 */
-  /* 品牌层（三档明度） */
-  --c-brand-light: #4da3f5;  /* 亮：浅填充、选中底 */
-  --c-brand: #0f7be0;        /* 中：按钮、图标、主强调 */
-  --c-brand-deep: #0a4a8a;   /* 深：压浅底的文字、高对比图标 */
-  --c-chip-bg: #e6f1fb;      /* 浅蓝芯片底 */
-  /* 强调层 */
-  --c-accent: #ff6a2b;       /* 暖橙：价格/限时/抢购，绝不做背景 */
+  /* 颜色与字体 token 统一在 src/styles/tokens.css（:root），此处不再声明 */
 
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--c-bg);
   color: var(--c-text);
   padding-bottom: 72px; /* tabbar 高度 + 缓冲 */
-  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* ---------- ① 状态栏 + 城市定位 ---------- */
@@ -253,7 +241,7 @@ function onCard(c: { name: string }) {
 .msg-btn__dot {
   position: absolute; top: 7px; right: 8px;
   width: 7px; height: 7px; border-radius: 50%;
-  background: var(--c-accent);
+  background: var(--c-red);
   border: 2px solid var(--c-bg);
 }
 
@@ -297,7 +285,7 @@ function onCard(c: { name: string }) {
   padding: 6px 14px;
   font-size: 12.5px; font-weight: 600;
   color: var(--c-brand-deep);       /* 深：压浅底的文字 */
-  background: var(--c-chip-bg);
+  background: var(--c-brand-soft);
   border-radius: 16px;
   transition: transform 0.15s;
 }
@@ -340,7 +328,7 @@ function onCard(c: { name: string }) {
   gap: 12px;
   padding: 14px;
   border-radius: 8px;                 /* 圆角 8px */
-  background: var(--c-chip-bg);        /* 浅蓝底 */
+  background: var(--c-brand-soft);        /* 浅蓝底 */
   border: 1px solid var(--c-brand);   /* 主色描边 */
   cursor: pointer;
   transition: transform 0.15s;
@@ -439,7 +427,7 @@ function onCard(c: { name: string }) {
   width: 100%;
   aspect-ratio: 4 / 3;
   border-radius: 4px;     /* 容器 12 − 内边距 8 */
-  background: linear-gradient(135deg, #edeff2 0%, #f6f7f9 100%);
+  background: linear-gradient(135deg, var(--c-divider) 0%, var(--c-bg) 100%);
   display: grid; place-items: center;
   position: relative;
 }
@@ -464,6 +452,6 @@ function onCard(c: { name: string }) {
 }
 .card__meta { font-size: 11px; color: var(--c-sub); margin-top: 2px; }
 .card__price { margin-top: 6px; }
-.card__price-num { font-size: 15px; font-weight: 800; color: var(--c-accent); } /* 暖橙：价格 */
+.card__price-num { font-size: 15px; font-weight: 800; color: var(--c-money); } /* 深蓝：金额，不再用暖橙（避免与待办动作撞色） */
 .card__price-unit { font-size: 11px; color: var(--c-sub); margin-left: 1px; }
 </style>

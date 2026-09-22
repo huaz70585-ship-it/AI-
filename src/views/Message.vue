@@ -91,39 +91,39 @@ interface Msg {
 /* 占位消息数据 */
 const messages = ref<Msg[]>([
   {
-    id: '1', type: 'trade', icon: 'clock-o', iconBg: '#ff6a2b',
+    id: '1', type: 'trade', icon: 'clock-o', iconBg: 'var(--c-accent)',
     title: '支付未完成，订单保留30分钟',
     preview: '「上海·4日」¥3,860 支付未成功，10:11 前可重新支付',
     time: '09:30', unread: true,
     cta: { label: '去支付', kind: 'pay' },
   },
   {
-    id: '2', type: 'trip', icon: 'medal-o', iconBg: '#0f7be0',
+    id: '2', type: 'trip', icon: 'medal-o', iconBg: 'var(--c-brand)',
     title: '行程已按你的要求重排',
     preview: 'AI 把「陆家嘴观景台」移到上午，避开午后阵雨',
     time: '08:20', unread: true,
     cta: { label: '查看行程', kind: 'view' },
   },
   {
-    id: '3', type: 'social', icon: 'bookmark-o', iconBg: '#8a939f',
+    id: '3', type: 'social', icon: 'bookmark-o', iconBg: 'var(--c-muted)',
     title: '你的行程被3人收藏',
     preview: '叶小舟 等3人收藏了「上海·4日」',
     time: '07:15', unread: false,
   },
   {
-    id: '4', type: 'trade', icon: 'passed', iconBg: '#0e7c6b',
+    id: '4', type: 'trade', icon: 'passed', iconBg: 'var(--c-accent)',
     title: '酒店预订成功',
     preview: '杭州西湖边精品酒店 · 10.12 入住1晚，已确认',
     time: '昨天 18:30', unread: false,
   },
   {
-    id: '5', type: 'system', icon: 'coupon-o', iconBg: '#8a939f',
+    id: '5', type: 'system', icon: 'coupon-o', iconBg: 'var(--c-muted)',
     title: '2张优惠券3天后过期',
     preview: '满500减80 · 满1000减200，逾期自动失效',
     time: '昨天 10:00', unread: false,
   },
   {
-    id: '6', type: 'trip', icon: 'logistics', iconBg: '#0e7c6b',
+    id: '6', type: 'trip', icon: 'logistics', iconBg: 'var(--c-brand)',
     title: '「杭州·2日」可以值机了',
     preview: '距出发还有3天，值机通道已开放',
     time: '09.20', unread: false,
@@ -168,23 +168,15 @@ function onBack() {
 
 <style scoped>
 .msg-page {
-  --c-bg: #f6f7f9;
-  --c-card: #ffffff;
-  --c-divider: #edeff2;
-  --c-text: #1a1d21;
-  --c-read: #6b7280;
-  --c-old: #8a939f;
-  --c-brand: #0f7be0;
-  --c-brand-deep: #0a4a8a;
-  --c-brand-soft: #e6f1fb;
-  --c-accent: #ff6a2b;
-  --c-red: #ff4d4f;
+  /* 通用颜色 token 见 src/styles/tokens.css，下面只留本页语义别名 */
+  --c-read: var(--c-sub);    /* 已读标题 */
+  --c-old: var(--c-muted);   /* 时间戳 / 已读预览 */
 
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--c-bg);
   color: var(--c-text);
-  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* ---------- 顶栏 ---------- */

@@ -130,27 +130,19 @@ const tripImage =
 <style scoped>
 /* 与首页 / 对话页共用三层体系 */
 .profile {
-  --c-bg: #f6f7f9;
-  --c-card: #ffffff;
-  --c-divider: #edeff2;
-  --c-text: #1a1d21;
-  --c-sub: #6b7280;
-  --c-brand: #0f7be0;
-  --c-brand-deep: #0a4a8a;
-  --c-brand-soft: #e6f1fb;
-  --c-accent: #ff6a2b;
+  /* 颜色与字体 token 统一在 src/styles/tokens.css（:root），此处不再声明 */
 
   min-height: 100vh;
   min-height: 100dvh;
   background: var(--c-bg);
   color: var(--c-text);
   padding-bottom: 72px; /* tabbar */
-  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* ---------- Hero ---------- */
 .hero {
-  background: linear-gradient(160deg, #0a4a8a 0%, #0f7be0 100%);
+  background: linear-gradient(160deg, var(--c-brand-deep) 0%, var(--c-brand) 100%);
   padding: calc(env(safe-area-inset-top) + 24px) 20px 44px;
   border-radius: 0 0 24px 24px;
 }

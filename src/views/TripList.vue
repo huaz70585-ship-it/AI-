@@ -181,17 +181,8 @@ function goPlan() {
 
 <style scoped>
 .triplist {
-  --c-bg: #f6f7f9;
-  --c-card: #ffffff;
-  --c-divider: #edeff2;
-  --c-text: #1a1d21;
-  --c-sub: #6b7280;
-  --c-old: #8a939f;
-  --c-brand: #0f7be0;
-  --c-brand-deep: #0a4a8a;
-  --c-brand-soft: #e6f1fb;
-  --c-warn: #ff6a2b;
-  --c-warn-soft: #fff3e6;
+  /* 通用颜色 token 见 src/styles/tokens.css，下面只留本页语义别名 */
+  --c-old: var(--c-muted);   /* 已结束行程的弱化信息 */
   --tabbar-h: calc(var(--van-tabbar-height, 50px) + env(safe-area-inset-bottom));
 
   min-height: 100vh;
@@ -199,7 +190,7 @@ function goPlan() {
   background: var(--c-bg);
   color: var(--c-text);
   padding-bottom: calc(var(--tabbar-h) + 16px);
-  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* ---------- 顶栏 ---------- */
@@ -286,7 +277,7 @@ function goPlan() {
   width: 88px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: linear-gradient(135deg, #edeff2 0%, #f6f7f9 100%);
+  background: linear-gradient(135deg, var(--c-divider) 0%, var(--c-bg) 100%);
   display: grid; place-items: center;
   overflow: hidden;
 }

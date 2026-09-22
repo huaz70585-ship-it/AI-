@@ -183,17 +183,8 @@ function onBack() {
 
 <style scoped>
 .trip-page {
-  --c-bg: #f6f7f9;
-  --c-card: #ffffff;
-  --c-divider: #edeff2;
-  --c-text: #1a1d21;
-  --c-sub: #6b7280;
-  --c-brand: #0f7be0;
-  --c-brand-deep: #0a4a8a;
-  --c-brand-soft: #e6f1fb;
-  --c-money: #0e7c6b;       /* 线框 teal：预算/金额 */
-  --c-warn: #ff6a2b;        /* 暖橙：待确认动作 */
-  --c-warn-soft: #fff3e6;
+  /* 颜色与字体 token 统一在 src/styles/tokens.css（:root）
+     注意：--c-money 已从线框遗留的 teal 统一为品牌深蓝 */
   /* 详情页不再有底部 tabbar（App.vue 只对 /trip 列表页显示 tabbar），
      这里只留安全区，供吸底操作栏与 FAB 定位 */
   --tabbar-h: env(safe-area-inset-bottom, 0px);
@@ -202,7 +193,7 @@ function onBack() {
   min-height: 100dvh;
   background: var(--c-bg);
   color: var(--c-text);
-  font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: var(--font-sans);
 }
 
 /* ---------- 顶栏标题 ---------- */
@@ -220,7 +211,7 @@ function onBack() {
   display: flex;
   margin: 8px 16px 0;
   padding: 3px;
-  background: #edeff2;
+  background: var(--c-divider);
   border-radius: 20px;
 }
 .seg__btn {
@@ -334,7 +325,7 @@ function onBack() {
   width: 56px; height: 56px;
   flex-shrink: 0;
   border-radius: 8px;
-  background: linear-gradient(135deg, #edeff2, #f6f7f9);
+  background: linear-gradient(135deg, var(--c-divider), var(--c-bg));
   display: grid; place-items: center;
   overflow: hidden;
 }
