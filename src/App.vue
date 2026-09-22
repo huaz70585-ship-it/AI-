@@ -21,3 +21,14 @@ const showTabbar = computed(() =>
     </van-tabbar>
   </van-config-provider>
 </template>
+
+<style>
+/* 底栏与滚动内容的视觉分隔。
+   Vant 的 van-tabbar 默认是无上边框的纯白平板，而页面卡片同为纯白 #fff：
+   滚动时白卡贴上白栏边界消失，看起来内容从底栏后面"穿透"（行程列表页最明显）。
+   用 --c-divider 细线 + 极轻上投影建立边界；阴影色取自 --c-text 的 rgb。 */
+.van-tabbar {
+  border-top: 1px solid var(--c-divider);
+  box-shadow: 0 -2px 8px rgba(26, 29, 33, 0.04);
+}
+</style>
